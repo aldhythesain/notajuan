@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Nota Penjahit</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+</head>
+
+<body>
+  <p class="center">
+  <h2><strong>Penjahit JUAN</strong></h2>
+  <h6>Alamat: Jl. Merdeka No.123, Serasan Jaya, <br>
+    Kec. Sekayu, Kabupaten Musi Banyuasin, Sumatera Selatan 30711<br>
+    Hp/WA: 0822 8020 5335</h6>
+  </p>
+  <p class="nota"><strong>NOTA PESANAN:</strong></p>
+  <div class="form-row">
+    <label>Kepada Yth:</label>
+    <input type="text" id="tuanToko" placeholder="Nama Pelanggan" name="nama" required>
+    <label for="tanggal">Terima Tanggal:</label>
+    <input type="date" id="notaTanggal" name="tanggal" required>
+
+  </div>
+  <div class="form-row">
+    <label>Nomor Hp :</label>
+    <input type="text" id="tuanToko" placeholder="Nomor Hp/WA" name="nama" required>
+    <label for="tanggal">Selesai Tanggal:</label>
+    <input type="date" id="tanggal" name="tanggal" required>
+  </div>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Qty</th>
+        <th>Detail Pesanan</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+      </tr>
+    </thead>
+    <tbody id="itemsTable">
+      <tr>
+        <td><input type="number" class="qty" value="1"></td>
+        <td><input type="text" class="name"></td>
+        <td><input type="number" class="price" value=""></td>
+        <td class="amount">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-row right">
+    <strong>Total Rp: <span id="total">0</span></strong>
+  </div>
+  <div class="form-row ">
+    <label><strong>Uang Muka (DP): Rp </strong><input type="number" id="dp" value="" oninput="calculateTotal()"></label>
+  </div>
+  <div class="form-row right">
+    <strong>Sisa Bayar Rp: <span id="sisa">0</span></strong>
+  </div>
+
+  <button onclick="addRow()">+ Tambah Keterangan</button>
+
+  <div class="info">
+    <strong>Catatan:</strong><br>
+    <p>*Simpan Nota Digital ini Sebagai Bukti Pesanan.<br>
+      *Pesanan yang tidak diambil selama 3 bulan jika rusak/hilang Kami tidak bertanggung jawab.</p>
+  </div>
+
+  </div>
+  <div class="simpan">
+    <button onclick="saveAsImage()">Simpan Nota</button>
+  </div>
+
+
+
+  <script>
+    function calculateTotal() {
+      let total = 0;
+      const rows = document.querySelectorAll("#itemsTable tr");
+      rows.forEach(row => {
+        const qty = parseFloat(row.querySelector(".qty").value) || 0;
+        const price = parseFloat(row.querySelector(".price").value) || 0;
+        const amount = qty * price;
+        row.querySelector(".amount").innerText = amount.toLocaleString("id-ID");
+        total += amount;
+      });
+
+      document.getElementById("total").innerText = total.toLocaleString("id-ID");
+
+      const dp = parseFloat(document.getElementById("dp").value) || 0;
+      const sisa = total - dp;
+      document.getElementById("sisa").innerText = sisa.toLocaleString("id-ID");
+    }
+
+
+    function addRow() {
+      const table = document.getElementById("itemsTable");
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><input type="number" class="qty" value="1"></td>
+        <td><input type="text" class="name"></td>
+        <td><input type="number" class="price" value="0"></td>
+        <td class="amount">0</td>
+      `;
+      table.appendChild(row);
+      attachListeners(row);
+    }
+
+    function attachListeners(row) {
+      row.querySelector(".qty").addEventListener("input", calculateTotal);
+      row.querySelector(".price").addEventListener("input", calculateTotal);
+    }
+
+    document.querySelectorAll("#itemsTable tr").forEach(attachListeners);
+    calculateTotal();
+
+    // Set tanggal otomatis
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("notaTanggal").value = today;
+
+
+
+    function saveAsImage() {
+      html2canvas(document.body).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'nota-penjahit.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+
+  </script>
+
+</body>
+
+</html>
