@@ -20,7 +20,6 @@
     <input type="text" id="tuanToko" placeholder="Nama Pelanggan" name="nama" required>
     <label for="tanggal">Terima Tanggal:</label>
     <input type="date" id="notaTanggal" name="tanggal" required>
-
   </div>
   <div class="form-row">
     <label>Nomor Hp :</label>
@@ -28,8 +27,6 @@
     <label for="tanggal">Selesai Tanggal:</label>
     <input type="date" id="tanggal" name="tanggal" required>
   </div>
-
-
   <table>
     <thead>
       <tr>
@@ -48,7 +45,6 @@
       </tr>
     </tbody>
   </table>
-
   <div class="form-row right">
     <strong>Total Rp: <span id="total">0</span></strong>
   </div>
@@ -58,22 +54,16 @@
   <div class="form-row right">
     <strong>Sisa Bayar Rp: <span id="sisa">0</span></strong>
   </div>
-
   <button onclick="addRow()">+ Tambah Keterangan</button>
-
   <div class="info">
     <strong>Catatan:</strong><br>
     <p>*Simpan Nota Digital ini Sebagai Bukti Pesanan.<br>
       *Pesanan yang tidak diambil selama 3 bulan jika rusak/hilang Kami tidak bertanggung jawab.</p>
   </div>
-
   </div>
   <div class="simpan">
     <button onclick="saveAsImage()">Simpan Nota</button>
   </div>
-
-
-
   <script>
     function calculateTotal() {
       let total = 0;
@@ -85,15 +75,11 @@
         row.querySelector(".amount").innerText = amount.toLocaleString("id-ID");
         total += amount;
       });
-
       document.getElementById("total").innerText = total.toLocaleString("id-ID");
-
       const dp = parseFloat(document.getElementById("dp").value) || 0;
       const sisa = total - dp;
       document.getElementById("sisa").innerText = sisa.toLocaleString("id-ID");
     }
-
-
     function addRow() {
       const table = document.getElementById("itemsTable");
       const row = document.createElement("tr");
@@ -106,21 +92,15 @@
       table.appendChild(row);
       attachListeners(row);
     }
-
     function attachListeners(row) {
       row.querySelector(".qty").addEventListener("input", calculateTotal);
       row.querySelector(".price").addEventListener("input", calculateTotal);
     }
-
     document.querySelectorAll("#itemsTable tr").forEach(attachListeners);
     calculateTotal();
-
     // Set tanggal otomatis
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("notaTanggal").value = today;
-
-
-
     function saveAsImage() {
       html2canvas(document.body).then(canvas => {
         const link = document.createElement('a');
@@ -129,8 +109,6 @@
         link.click();
       });
     }
-
   </script>
-
 </body>
 </html>
