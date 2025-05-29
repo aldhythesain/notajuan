@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
+
 <body>
   <p class="center">
   <h2><strong>Penjahit JUAN</strong></h2>
@@ -14,24 +16,27 @@
     Kec. Sekayu, Kabupaten Musi Banyuasin, Sumatera Selatan 30711<br>
     Hp/WA: 0822 8020 5335</h6>
   </p>
+  <div class="waktu">
+    <label for="tanggal">Terima Tanggal:</label>
+    <input type="date" id="notaTanggal" name="tanggal" required>
+  </div>
+  <div class="waktu">
+    <label for="tanggal">Terima Tanggal:</label>
+    <input type="date" id="notaTanggal" name="tanggal" required>
+  </div>
   <p class="nota"><strong>NOTA PESANAN:</strong></p>
   <div class="form-row">
     <label>Kepada Yth:</label>
     <input type="text" id="tuanToko" placeholder="Nama Pelanggan" name="nama" required>
-    <label for="tanggal">Terima Tanggal:</label>
-    <input type="date" id="notaTanggal" name="tanggal" required>
   </div>
   <div class="form-row">
     <label>Nomor Hp :</label>
     <input type="text" id="tuanToko" placeholder="Nomor Hp/WA" name="nama" required>
-    <label for="tanggal">Selesai Tanggal:</label>
-    <input type="date" id="tanggal" name="tanggal" required>
   </div>
   <table>
     <thead>
       <tr>
         <th>Qty</th>
-        <th>Detail Pesanan</th>
         <th>Harga</th>
         <th>Jumlah</th>
       </tr>
@@ -39,12 +44,13 @@
     <tbody id="itemsTable">
       <tr>
         <td><input type="number" class="qty" value="1"></td>
-        <td><input type="text" class="name"></td>
         <td><input type="number" class="price" value=""></td>
         <td class="amount">0</td>
       </tr>
     </tbody>
   </table>
+  <label for="detailPesanan">Detail Pesanan:</label><br>
+  <textarea id="detailPesanan" name="detailPesanan" rows="5" cols="50" style="resize: both; overflow: auto;"></textarea>
   <div class="form-row right">
     <strong>Total Rp: <span id="total">0</span></strong>
   </div>
@@ -54,7 +60,7 @@
   <div class="form-row right">
     <strong>Sisa Bayar Rp: <span id="sisa">0</span></strong>
   </div>
-  <button onclick="addRow()">+ Tambah Keterangan</button>
+ 
   <div class="info">
     <strong>Catatan:</strong><br>
     <p>*Simpan Nota Digital ini Sebagai Bukti Pesanan.<br>
