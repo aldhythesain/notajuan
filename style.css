@@ -78,14 +78,23 @@ button {
   text-align: center;
 }
 .info {
+    text-align: left;
     font-size: 12px;
     color: #fc0909;
     margin-top: 20px;
   }
   .nota {
+    text-align: center;
     color:#fc0909
   }
   .simpan{
 
     text-align: center;
+  }
+  .waktu {
+  margin-top: 15px;
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+  flex-wrap: wrap;
   }
